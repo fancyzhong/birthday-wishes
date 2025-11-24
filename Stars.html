@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>点亮星空</title>
+	<style>
+	*{
+	margin: 0;
+	padding: 0;		
+	}
+		body{
+			width: 100%;
+			height: 600px;
+			background: linear-gradient(to bottom right,#000,#2073c2 60%,#dff6ff);
+			margin: 0 auto;
+		}
+		span{
+			display: block;
+			position: absolute;
+			border-radius: 50%;
+			box-shadow:0.5px 0.5px 0.5px 0px #fff;
+		}
+		button{
+			background-color: darkblue;
+			width: 100px;
+			height: 40px;
+			color: white;
+		}
+		#box{
+			width: 400px;
+			height: 450px;
+			background-color: #fff;
+			position: relative;
+			top: 100px;
+			left: 440px;
+			background-color: rgba(255,255,255,0.2);
+			box-shadow:  0px 0px 10px #ccc;
+			border-radius:5px;
+			text-align: center;	
+
+		}
+		#box p{
+			color: #fff;
+			text-shadow: 0px 0px 2px seagreen;
+			font-size: 20px;
+			font-family: "华文中宋";	
+			padding: 10px;		
+		}
+		h1{
+			background-color:blue;
+			color: white;
+		}
+		button:hover{
+			transform: scale(1.2);
+			background-color:dodgerblue;
+			font-weight: bolder;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		window.onload=function(){
+			var screenW=document.documentElement.clientWidth;
+			var screenH=document.documentElement.clientHeight;
+			var colorArr=["#fff","orange","skyblue"];
+			console.log(screenW);
+			for(var i=0;i<800;i++)
+			{
+				var span =document.createElement('span');
+				var width=Math.random()*3;
+				var colorIndex=parseInt(Math.random()*3);
+				var x=parseInt(Math.random()*screenW);
+				var y=parseInt(Math.random()*screenH);
+				span.style.width=parseInt(width)+"px";
+				span.style.height=parseInt(width)+"px";
+				span.style.left=x+"px";
+				span.style.top=y+"px";
+				document.body.appendChild(span);
+			}
+		}
+		function now(){
+			var date=new Date();
+			var year=date.getFullYear();
+			var month=date.getMonth()+1;
+			var day=date.getDate();
+			var hour=date.getHours();
+			var minute=date.getMinutes();
+			var minutes="";
+			var second=date.getSeconds();
+			var seconds="";
+			var element=document.getElementById('time');
+			if(minute<10)
+			{
+				minutes="0"+minute;
+			}
+			if(second<10)
+			{
+				seconds="0"+second;
+			}
+			else
+			{
+				seconds+=second;
+			}
+
+
+			element.innerHTML="<p>现在时间是<h1>"+year+"年"+month+"月"+day+"日"+" "+hour+":"+minute+":"+seconds+"</h1></p>";
+
+		}
+		setInterval("now()",1000);
+	</script>
+	<div id="box">
+		<div id="time">		
+		</div>
+		<p>WECOME TO MY WEBSITE</p>
+		<p>欢迎来到我的星球</p>
+		<p></p>
+		<p>点击按钮发现更多的故事——</p>
+		<p>Explore</p>
+		<a href="index.html"><button>探索</button></a>
+	</div>
+	
+</body>
+</html>

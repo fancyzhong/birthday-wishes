@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>漂浮祝福</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom right,#000,#2073c2 60%,#dff6ff);
+            margin: 0 auto;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        span.star {
+            display: block;
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0.5px 0.5px 0.5px 0px #fff;
+            z-index: 0;
+        }
+        .wish {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            opacity: 0;
+            animation: float linear infinite;
+            white-space: nowrap;
+            z-index: 1;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(var(--translate-x));
+                opacity: 0;
+            }
+        }
+        .back-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: 2px solid white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .back-btn:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: translateX(-50%) translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">返回主页</a>
+
+    <script>
+        // 创建星星特效
+        function createStars() {
+            var screenW = document.documentElement.clientWidth;
+            var screenH = document.documentElement.clientHeight;
+            var colorArr = ['#fff', 'orange', 'skyblue'];
+            
+            for(var i = 0; i < 800; i++) {
+                var span = document.createElement('span');
+                span.className = 'star';
+                var width = Math.random() * 3;
+                var colorIndex = parseInt(Math.random() * 3);
+                var x = parseInt(Math.random() * screenW);
+                var y = parseInt(Math.random() * screenH);
+                span.style.width = parseInt(width) + 'px';
+                span.style.height = parseInt(width) + 'px';
+                span.style.left = x + 'px';
+                span.style.top = y + 'px';
+                span.style.backgroundColor = colorArr[colorIndex];
+                document.body.appendChild(span);
+            }
+        }
+        
+        // 创建星星特效
+        createStars();
+
+        // 祝福语句数组
+        const wishes = [
+            '学业顺利', '爱情美满', '生活快乐', '财源滚滚',
+            '身体健康', '事业有成', '家庭幸福', '前程似锦',
+            '吉祥如意', '万事如意', '天天开心', '好运连连',
+            '学业进步', '工作顺利', '笑口常开', '步步高升',
+            '心想事成', '美梦成真', '幸福安康', '吉祥安康'
+        ];
+
+        // 创建随机祝福
+        function createWish() {
+            // 随机选择祝福语句
+            const wishText = wishes[Math.floor(Math.random() * wishes.length)];
+            
+            // 创建元素
+            const wishElement = document.createElement('div');
+            wishElement.classList.add('wish');
+            wishElement.textContent = wishText;
+            
+            // 随机位置和样式
+            const startX = Math.random() * window.innerWidth;
+            const size = 16 + Math.random() * 20;
+            const duration = 10 + Math.random() * 20;
+            const translateX = (Math.random() - 0.5) * 400;
+            const delay = Math.random() * 5;
+            const rotation = (Math.random() - 0.5) * 20;
+            const colors = ['#ffffff', '#ffd700', '#ff6b6b', '#4ecdc4', '#95e1d3'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            // 设置样式
+            wishElement.style.left = startX + 'px';
+            wishElement.style.bottom = '-50px';
+            wishElement.style.fontSize = size + 'px';
+            wishElement.style.color = color;
+            wishElement.style.transform = `rotate(${rotation}deg)`;
+            wishElement.style.animationDuration = duration + 's';
+            wishElement.style.animationDelay = delay + 's';
+            wishElement.style.setProperty('--translate-x', translateX + 'px');
+            
+            // 添加到页面
+            document.body.appendChild(wishElement);
+            
+            // 动画结束后移除元素
+            setTimeout(() => {
+                wishElement.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        // 定期创建祝福
+        setInterval(createWish, 500);
+        
+        // 初始创建一些祝福
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createWish, i * 300);
+        }
+    </script>
+</body>
+</html>
